@@ -70,7 +70,7 @@ install-tools:
 	sudo apt install -y percona-toolkit dstat git unzip snapd graphviz tree
 
     # alpのインストール
-	wget https://github.com/tkuchiki/alp/releases/download/v1.0.9/alp_linux_arm64.zip
+	wget https://github.com/tkuchiki/alp/releases/download/v1.0.21/alp_linux_arm64.zip
 	unzip alp_linux_arm64.zip
 	sudo install alp /usr/local/bin/alp
 	rm alp_linux_arm64.zip alp
