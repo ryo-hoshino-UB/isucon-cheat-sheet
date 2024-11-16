@@ -72,20 +72,20 @@ install-tools:
 	sudo apt upgrade
 	sudo apt install -y percona-toolkit dstat git unzip snapd graphviz tree
 
-	# alpのインストール
-	ifeq ($(ARCH), amd64)
-		wget https://github.com/tkuchiki/alp/releases/download/v1.0.9/alp_linux_amd64.zip
-		unzip alp_linux_amd64.zip
-		sudo install alp /usr/local/bin/alp
-		rm alp_linux_amd64.zip alp
-    	else ifeq ($(ARCH), aarch64)
-		wget https://github.com/tkuchiki/alp/releases/download/v1.0.21/alp_linux_arm64.zip
-		unzip alp_linux_arm64.zip
-        	sudo install alp /usr/local/bin/alp
-        	rm alp_linux_arm64.zip alp
-    	else
-        	@echo "Unsupported architecture: $(ARCH)"
-    	endif
+    # alpのインストール
+    ifeq ($(ARCH), x86_64)
+        wget https://github.com/tkuchiki/alp/releases/download/v1.0.9/alp_linux_amd64.zip
+        unzip alp_linux_amd64.zip
+        sudo install alp /usr/local/bin/alp
+        rm alp_linux_amd64.zip alp
+    else ifeq ($(ARCH), aarch64)
+        wget https://github.com/tkuchiki/alp/releases/download/v1.0.9/alp_linux_arm64.zip
+        unzip alp_linux_arm64.zip
+        sudo install alp /usr/local/bin/alp
+        rm alp_linux_arm64.zip alp
+    else
+        @echo "Unsupported architecture: $(ARCH)"
+    endif
 
 .PHONY: git-setup
 git-setup:
