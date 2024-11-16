@@ -65,9 +65,9 @@ access-db:
 
 .PHONY: install-tools
 install-tools:
-	sudo apt update
-	sudo apt upgrade
-	sudo apt install -y percona-toolkit dstat git unzip snapd graphviz tree
+    sudo apt update
+    sudo apt upgrade
+    sudo apt install -y percona-toolkit dstat git unzip snapd graphviz tree
 
     # alpのインストール
     wget https://github.com/tkuchiki/alp/releases/download/v1.0.9/alp_linux_arm64.zip
