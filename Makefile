@@ -159,6 +159,7 @@ deploy-envsh:
 .PHONY: build
 build:
 	cd $(BUILD_DIR); \
+	git pull
 	go build -o $(BIN_NAME)
 
 .PHONY: restart
