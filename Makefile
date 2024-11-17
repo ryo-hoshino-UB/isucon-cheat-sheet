@@ -13,6 +13,7 @@ SERVICE_NAME:=$(BIN_NAME).go.service
 DB_PATH:=/etc/mysql
 NGINX_PATH:=/etc/nginx
 SYSTEMD_PATH:=/etc/systemd/system
+TOOL_CONFIG_PATH:=/home/isucon/tool-config
 
 NGINX_LOG:=/var/log/nginx/access.log
 DB_SLOW_LOG:=/var/log/mysql/mariadb-slow.log
@@ -43,7 +44,7 @@ slow-query:
 # alpでアクセスログを確認する
 .PHONY: alp
 alp:
-	sudo alp ltsv --file=$(NGINX_LOG) --config=/home/isucon/tool-config/alp/config.yml
+	sudo alp ltsv --file=$(NGINX_LOG) --config=$(TOOL_CONFIG_PATH)/alp/config.yml
 
 # pprofで記録する
 .PHONY: pprof-record
@@ -83,6 +84,20 @@ git-setup:
 
 	# deploykeyの作成
 	ssh-keygen -t ed25519
+
+.PHONY: tool-config-setup
+tool-config-setup:
+	mkdir $(TOOL_CONFIG_PATH)/alp
+	cat << EOF > $(TOOL_CONFIG_PATH)/alp/config.yml
+		---
+		sort: sum  # max|min|avg|sum|count|uri|method|max-body|min-body|avg-body|sum-body|p1|p50|p99|stddev
+		reverse: true                   # boolean
+		query_string: true              # boolean
+		output: count,5xx,4xx,3xx,method,uri,min,max,sum,avg,p99                    # string(comma separated)
+
+		# matching_groups:            # array
+		# -  
+	EOF
 
 .PHONY: check-server-id
 check-server-id:
