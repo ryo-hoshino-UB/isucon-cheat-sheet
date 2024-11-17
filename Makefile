@@ -76,6 +76,18 @@ install-tools:
 	sudo install alp /usr/local/bin/alp
 	rm alp_linux_arm64.zip alp
 
+# slpのインストール
+	wget https://github.com/tkuchiki/slp/releases/download/v0.2.1/slp_linux_arm64.tar.gz
+	tar -xvf slp_linux_arm64.tar.gz
+	rm slp_linux_arm64.tar.gz
+	sudo mv slp /usr/local/bin/slp
+    
+    # pproteinのインストール
+	wget https://github.com/kaz/pprotein/releases/download/v1.2.4/pprotein_1.2.4_linux_arm64.tar.gz
+    tar -xvf pprotein_1.2.4_linux_arm64.tar.gz
+	rm pprotein_1.2.4_linux_arm64.tar.gz
+
+
 .PHONY: git-setup
 git-setup:
 	# git用の設定は適宜変更して良い
