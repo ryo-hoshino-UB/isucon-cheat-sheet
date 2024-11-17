@@ -121,11 +121,13 @@ set-as-s3:
 
 .PHONY: get-db-conf
 get-db-conf:
+	sudo mkdir -p ~/$(SERVER_ID)/etc/mysql
 	sudo cp -R $(DB_PATH)/* ~/$(SERVER_ID)/etc/mysql
 	sudo chown $(USER) -R ~/$(SERVER_ID)/etc/mysql
 
 .PHONY: get-nginx-conf
 get-nginx-conf:
+	sudo mkdir -p ~/$(SERVER_ID)/etc/nginx
 	sudo cp -R $(NGINX_PATH)/* ~/$(SERVER_ID)/etc/nginx
 	sudo chown $(USER) -R ~/$(SERVER_ID)/etc/nginx
 
