@@ -89,16 +89,17 @@ git-setup:
 .PHONY: tool-config-setup
 tool-config-setup:
 	sudo mkdir -p $(TOOL_CONFIG_PATH)/alp
-	sudo cat << EOF > $(TOOL_CONFIG_PATH)/alp/config.yml
-		---
-		sort: sum  # max|min|avg|sum|count|uri|method|max-body|min-body|avg-body|sum-body|p1|p50|p99|stddev
-		reverse: true                   # boolean
-		query_string: true              # boolean
-		output: count,5xx,4xx,3xx,method,uri,min,max,sum,avg,p99                    # string(comma separated)
-
-		# matching_groups:            # array
-		# -  
-	EOF
+.PHONY: tool-config-setup
+tool-config-setup:
+    sudo mkdir -p $(TOOL_CONFIG_PATH)/alp
+    echo "---" | sudo tee $(TOOL_CONFIG_PATH)/alp/config.yml > /dev/null
+    echo "sort: sum  # max|min|avg|sum|count|uri|method|max-body|min-body|avg-body|sum-body|p1|p50|p99|stddev" | sudo tee -a $(TOOL_CONFIG_PATH)/alp/config.yml > /dev/null
+    echo "reverse: true                   # boolean" | sudo tee -a $(TOOL_CONFIG_PATH)/alp/config.yml > /dev/null
+    echo "query_string: true              # boolean" | sudo tee -a $(TOOL_CONFIG_PATH)/alp/config.yml > /dev/null
+    echo "output: count,5xx,4xx,3xx,method,uri,min,max,sum,avg,p99                    # string(comma separated" | sudo tee -a $(TOOL_CONFIG_PATH)/alp/config.yml > /dev/null
+    echo "" | sudo tee -a $(TOOL_CONFIG_PATH)/alp/config.yml > /dev/null
+    echo "# matching_groups:            # array" | sudo tee -a $(TOOL_CONFIG_PATH)/alp/config.yml > /dev/null
+    echo "# -" | sudo tee -a $(TOOL_CONFIG_PATH)/alp/config.yml > /dev/null
 
 .PHONY: check-server-id
 check-server-id:
