@@ -83,12 +83,13 @@ git-setup:
 	git config --global user.name "isucon"
 
 	# deploykeyの作成
+	cd ~/.ssh
 	ssh-keygen -t ed25519
 
 .PHONY: tool-config-setup
 tool-config-setup:
-	mkdir $(TOOL_CONFIG_PATH)/alp
-	cat << EOF > $(TOOL_CONFIG_PATH)/alp/config.yml
+	sudo mkdir -p $(TOOL_CONFIG_PATH)/alp
+	sudo cat << EOF > $(TOOL_CONFIG_PATH)/alp/config.yml
 		---
 		sort: sum  # max|min|avg|sum|count|uri|method|max-body|min-body|avg-body|sum-body|p1|p50|p99|stddev
 		reverse: true                   # boolean
