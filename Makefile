@@ -89,9 +89,6 @@ git-setup:
 .PHONY: tool-config-setup
 tool-config-setup:
 	sudo mkdir -p $(TOOL_CONFIG_PATH)/alp
-.PHONY: tool-config-setup
-tool-config-setup:
-	sudo mkdir -p $(TOOL_CONFIG_PATH)/alp
 	echo "---" | sudo tee $(TOOL_CONFIG_PATH)/alp/config.yml > /dev/null
 	echo "sort: sum  # max|min|avg|sum|count|uri|method|max-body|min-body|avg-body|sum-body|p1|p50|p99|stddev" | sudo tee -a $(TOOL_CONFIG_PATH)/alp/config.yml > /dev/null
 	echo "reverse: true                   # boolean" | sudo tee -a $(TOOL_CONFIG_PATH)/alp/config.yml > /dev/null
