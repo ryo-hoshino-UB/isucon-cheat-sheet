@@ -16,7 +16,7 @@ SYSTEMD_PATH:=/etc/systemd/system
 TOOL_CONFIG_PATH:=/home/isucon/tool-config
 
 NGINX_LOG:=/var/log/nginx/access.log
-DB_SLOW_LOG:=/var/log/mysql/mariadb-slow.log
+DB_SLOW_LOG:=/var/log/mysql/mysql-slow.log
 
 # メインで使うコマンド ------------------------
 
@@ -34,7 +34,11 @@ deploy-conf: check-server-id deploy-db-conf deploy-nginx-conf deploy-service-fil
 
 # ベンチマークを走らせる直前に実行する
 .PHONY: bench
-bench: check-server-id mv-logs build deploy-conf restart watch-service-log
+bench: check-server-id mv-logs build deploy-conf restart watch-service-log pprotein
+
+.PHONY: pprotein
+pprotein:
+	./pprotein
 
 # slow queryを確認する
 .PHONY: slow-query
@@ -76,7 +80,7 @@ install-tools:
 	sudo install alp /usr/local/bin/alp
 	rm alp_linux_arm64.zip alp
 
-# slpのインストール
+    # slpのインストール
 	wget https://github.com/tkuchiki/slp/releases/download/v0.2.1/slp_linux_arm64.tar.gz
 	tar -xvf slp_linux_arm64.tar.gz
 	rm slp_linux_arm64.tar.gz
@@ -84,8 +88,12 @@ install-tools:
     
     # pproteinのインストール
 	wget https://github.com/kaz/pprotein/releases/download/v1.2.4/pprotein_1.2.4_linux_arm64.tar.gz
-    tar -xvf pprotein_1.2.4_linux_arm64.tar.gz
+	tar -xvf pprotein_1.2.4_linux_arm64.tar.gz
 	rm pprotein_1.2.4_linux_arm64.tar.gz
+
+    # dool (dstatの後継)のインストール
+	curl https://cdn.jsdelivr.net/gh/scottchiefbaker/dool@master/dool | sudo tee /usr/local/bin/dool
+	sudo chmod +x /usr/local/bin/dool
 
 
 .PHONY: git-setup
