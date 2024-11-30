@@ -28,7 +28,7 @@ setup: install-tools git-setup
 
 # 設定ファイルなどを取得してgit管理下に配置する
 .PHONY: get-conf
-get-conf: check-server-id get-db-conf get-nginx-conf get-service-file get-envsh
+get-conf: check-server-id get-db-conf get-nginx-conf get-service-file get-envsh get-app-code
 
 # リポジトリ内の設定ファイルをそれぞれ配置する
 .PHONY: deploy-conf
@@ -36,11 +36,7 @@ deploy-conf: check-server-id deploy-db-conf deploy-nginx-conf deploy-service-fil
 
 # ベンチマークを走らせる直前に実行する
 .PHONY: bench
-bench: check-server-id mv-logs build deploy-conf restart watch-service-log pprotein
-
-.PHONY: pprotein
-pprotein:
-	./pprotein
+bench: check-server-id mv-logs build deploy-conf restart watch-service-log 
 
 # slow queryを確認する
 .PHONY: slow-query
